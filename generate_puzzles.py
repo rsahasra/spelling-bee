@@ -267,20 +267,7 @@ def count_plurals(results):
 	['APPLAUSE', 'GAUGE', 'GAUGES', 'GLUE', 'GLUES', 'GUESS', 'GUESSES', 'GULL', 'GULLS', 'GULP', 'GULPS', 'LEAGUE', 'LEAGUES', 'LUGGAGE', 'LUGS', 'LULL', 'LULLS', 'PAUSE', 'PAUSES', 'PLAGUE', 'PLAGUES', 'PLUG', 'PLUGS', 'PLUS', 'PLUSES', 'PULL', 'PULLS', 'PULP', 'PULPS', 'PULSE', 'PULSES', 'PUPS', 'PUSS', 'PUSSES', 'SAUSAGE', 'SAUSAGES', 'SLUG', 'SLUGS', 'SUES', 'SUPPLE', 'USAGE', 'USAGES', 'USELESS', 'USES', 'USUAL']
 
 	"""
-
-	words = list(x['word'] for x in results)
-	count=0
-	for word in words:
-		if not word.endswith('S'):
-			continue
-		if word[0:-1] in words:
-			count=count+1
-		if not word.endswith('ES'):
-			continue
-		if word[0:-2] in words:
-			count=count+1
-	return count
-
+	# todo implement me
 
 def count_gerunds(results):
 	"""Given a list of words, return the number of pairs which appear as

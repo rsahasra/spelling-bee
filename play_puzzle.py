@@ -40,27 +40,18 @@ def play(puzl):
         # ask user to guess a word
         guess = ask_user()
 
-        # user need some help
         if guess.startswith('!'):
             help(guess, letters, guess_list, player_score, player_words, player_pangram, total_score, word_count)
             continue
-
-        # already guessed that
-        if guess in guess_list:
-            print ('You already found:',guess,'\n')
-            continue
         
-        # guess less than minimum letters
         if len(guess) < params.MIN_WORD_LENGTH:
             print ('Guessed word is too short. Minimum length:',str(params.MIN_WORD_LENGTH),'\n')
             continue           
 
-        # scenario 1: includes letter not in a list
         if any([x for x in guess if x not in letters]):
             print ('Invalid letter(s)','\n')
             continue
 
-        # scenario 2: doesn't include center letter but all other letters valid
         if letters[0] not in guess:
             print ('Must include center letter:',letters[0],'\n')
             continue
@@ -73,10 +64,6 @@ def play(puzl):
             # scenario 4: not a valid word
             print ('Sorry,',guess,'is not a valid word','\n')
             continue
-        elif guess in guess_list:
-            # scenario 5: good word but already found
-            print ('You already found',guess,'\n')
-            continue
         else:
             # word is valid and found
             word_dict = word_list[word_index]
@@ -84,12 +71,6 @@ def play(puzl):
             player_words += 1
 
             word_score = word_dict.get('score')
-            if word_dict.get('word') in pangram_list:
-                # pangrams are worth +7 extra
-                word_score += 7
-                player_pangram = True
-                print ('\nPANGRAM!!!')
-                #guess += '*'
 
             player_score += word_score
 
@@ -105,20 +86,13 @@ def play(puzl):
             # print success and running stats
             utils.print_table(print_list, len(print_list), 22)
             print()
-
-            # add good guess to the list, so it can't be reused
-            guess_list.append(guess)
         
         # all words found (somehow this could be possible)
         if player_words == word_count:
             print ('Congratulations. You found them all!','\n')
 
-def shuffle_letters(letters):
-    # shuffles letters, excluding the center letter
-    # random.shuffle() only works in place
-    other_letters = list(letters[1:])
-    random.shuffle(other_letters)
-    return letters[0] + ''.join(other_letters)
+# def shuffle_letters(letters):
+    # TODO: IMPLEMENT ME
 
 def draw_letters_honeycomb(letters):
     
